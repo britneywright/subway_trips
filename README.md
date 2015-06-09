@@ -1,7 +1,8 @@
 MTA Trip Logs
 
 #Currently
-- price of the pass is hard coded, more reusable if passed in as a argument 
+- csv filename and pass price passed in as arguments
+- pass price isn't parsed correctly if it includes $ 
 
 ##Capabilities 
 - Read csv of trip data

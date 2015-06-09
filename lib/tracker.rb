@@ -3,34 +3,31 @@ require 'csv'
 class Subway
 
   def self.run(argv)
-   j = Pass.new(argv[0])
+   j = Pass.new(argv[0],argv[1])
    j.result
+   0 #exit status
   end
   
   class Pass
     attr_accessor :price
 
-    def initialize(csv)
+    def initialize(csv,price)
       @csv = csv
-      @trips = trips
-      @price = Float(price)
+      @trips = all_trips
+      @price = price_in_cents(price) 
     end
 
     def result
-      p "You've gone on #{self.trips.length} trips this month."
+      p "You've gone on #{@trips.length} trips this month."
       p "The average cost per trip is $#{self.cost_per_trip}."
     end
 
-    def price
-      116.00
-    end
-
-    def price_in_cents
-      Integer(price * 100 + 0.5)
+    def price_in_cents(price)
+      Integer(price.sub("$","").to_f * 100)
     end
 
     def cost_per_trip
-      in_cents = Float(price_in_cents/@trips.length)
+      in_cents = Float(@price/@trips.length)
       Float(in_cents/100)
     end
 
@@ -38,9 +35,9 @@ class Subway
       "$#{cost_per_trip}"
     end
     
-    def trips(all = []) 
+    def all_trips(all = [])
       CSV.foreach("#{@csv}") do |trip|
-        all << Trip.new(trip)
+       all << Trip.new(trip)
       end
       all
     end
