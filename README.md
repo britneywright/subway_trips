@@ -1,9 +1,7 @@
 MTA Trip Logs
 
 #Currently
-
-- june.csv hard coded to run
-- executable does not work
+- price of the pass is hard coded, more reusable if passed in as a argument 
 
 ##Capabilities 
 - Read csv of trip data
